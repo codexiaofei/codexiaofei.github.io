@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  itemscope
+  itemtype="http://schema.org/WebPage"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+          一文看懂Redis 6.0多线程IO - 码农小飞哥
+        </title>
+    
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="码农小飞哥" />
+  <meta name="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个" />
+<meta name="keywords" content="Redis" />
+
+
+
+
+
+<meta name="sogou_site_verification" content="dtuHIGY7cK" />
+<meta name="msvalidate.01" content="9CB8E7A6AD8ADF22F9ED93166445E5B9" />
+
+
+<script data-ad-client="ca-pub-6791708134711137" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6791708134711137"
+     crossorigin="anonymous"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ3LW65VYR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ3LW65VYR');
+</script>
+
+
+<meta name="generator" content="Hugo 0.115.4" />
+
+
+<link rel="canonical" href="https://www.techxiaofei.com/post/redis/multithreading/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.521bf0df4a696edd93489b3746a0e3f2fba7995a7cc3f459badc28ad64f82927.css" integrity="sha256-Uhvw30ppbt2TSJs3RqDj8vunmVp8w/RZutworWT4KSc=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+
+
+<meta property="og:title" content="一文看懂Redis 6.0多线程IO" />
+<meta property="og:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.techxiaofei.com/post/redis/multithreading/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-09T00:00:51+08:00" />
+<meta property="article:modified_time" content="2021-12-09T00:00:51+08:00" />
+<meta itemprop="name" content="一文看懂Redis 6.0多线程IO">
+<meta itemprop="description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个"><meta itemprop="datePublished" content="2021-12-09T00:00:51+08:00" />
+<meta itemprop="dateModified" content="2021-12-09T00:00:51+08:00" />
+<meta itemprop="wordCount" content="3412">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一文看懂Redis 6.0多线程IO"/>
+<meta name="twitter:description" content="本篇博客的视频教程首发于 Youtube：科技小飞哥，加入 电报粉丝群 获得最新视频更新和问题解答。 Redis基础 Redis是什么 Redis是一个"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+  </head>
+  <body>
+    <div id="back-to-top"></div>
+
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">码农小飞哥</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/">首页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/post/">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/categories/">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/friend/">友链</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/about/">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+    
+
+    
+
+    
+
+
+    <header id="header" class="header">
+      <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      码农小飞哥
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/">首页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/post/">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/categories/">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/friend/">友链</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.techxiaofei.com/about/">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+    </header>
+
+    <div id="mobile-panel">
+      <main id="main" class="main bg-llight wallpaper">
+        <div class="content-wrapper">
+    <div id="content" class="content">
+      <article class="post">
+        
+        <header class="post-header">
+          <h1 class="post-title">一文看懂Redis 6.0多线程IO</h1>
+          
+
+          <div class="post-meta">
+  <div class="post-meta-author">
+    by
+      <a href="/about">
+        <span class="post-meta-author-name">
+          码农小飞哥
+        </span>
+      </a>
+    
+  </div>
+
+  <div class="post-meta-time">
+    <time datetime="2021-12-09">
+      2021-12-09
+    </time>
+  </div>
+
+  
+
+
+  <div class="post-meta__right">
+    <span class="post-meta-more">
+        约 3412 字 -
+        预计阅读 7 分钟
+      </span>
+
+    <div class="post-meta-category">
+        <a href="https://www.techxiaofei.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"> 编程技术 </a>
+          
+      </div>
+
+
+    
+    
+
+
+    
+    
+  </div>
+</div>
+
+        </header>
+
+        
+        <div class="post-content">
+          <p>本篇博客的视频教程首发于 <a href="https://www.youtube.com/@techxiaofei"><strong>Youtube：科技小飞哥</strong></a>，加入 <a href="https://t.me/+5OzmrG-iyJE2YzM9"><strong>电报粉丝群</strong></a> 获得最新视频更新和问题解答。</p>
+<h1 id="redis基础">Redis基础</h1>
+<h3 id="redis是什么">Redis是什么</h3>
+<p>Redis是一个基于BSD开源的项目，是一个把结构化的数据放在内存中的一个存储系统。</p>
+<p>你可以把它作为数据库，缓存和消息中间件来使用。同时支持<code>strings</code>，<code>lists</code>，<code>hashes</code>，<code>sets</code>，<code>sorted sets</code>，<code>bitmaps</code>，<code>hyperloglogs</code>和<code>geospatial indexes</code>等数据类型。</p>
+<p>它还通过redis sentinel实现高可用，通过redis cluster实现了自动分片。以及事务，发布/订阅，自动故障转移等等。</p>
+<h3 id="为什么用redis">为什么用Redis</h3>
+<p>而在后端开发的技术选型中，Redis已经成为了一个不可绕过的解决方案工具。因此Redis成为了后端开发的基本技能之一。当然，也是后端面试中必考的技术栈之一。</p>
+<p>Redis的优点，如果只用一个字来解释，那就是：快！</p>
+<p>Redis 有多快？官方给出的答案是读写速度 10万/秒，如果说这是在单线程情况下跑出来的成绩，你会不会惊讶？为什么单线程的 Redis 速度这么快？</p>
+<h3 id="redis为什么快">Redis为什么快</h3>
+<p>主要有以下几点：</p>
+<ol>
+<li><strong>Redis 是基于内存的。</strong> 内存的读写速度非常快。当然Redis也存在持久化操作，但是是fork子进程和利用 Linux 系统的页缓存技术来完成，并不会影响Redis的读写性能。</li>
+<li><strong>Redis 是单线程的。</strong> 避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗。</li>
+<li><strong>Redis 使用多路复用技术。</strong> 可以处理并发的连接。非阻塞 IO 部实现采用 epoll，采用了 epoll+自己实现的简单的事件框架。epoll 中的读、写、关闭、连接都转化成了事件，然后利用 epoll 的多路复用特性，绝不在 IO 上浪费一点时间。</li>
+<li><strong>Redis 中的数据结构是专门进行设计的。</strong> 数据结构简单。对数据操作也简单。</li>
+</ol>
+<h3 id="redis是单线程的吗">Redis是单线程的吗</h3>
+<p>我们经常听到，Redis是单线程的，这句话对吗？</p>
+<p>基本上是对的，但是不准确。</p>
+<p>而对于为什么使用单线程，官方有一句解释：</p>
+<blockquote>
+<p>It&rsquo;s not very frequent that CPU becomes your bottleneck with Redis, as usually Redis is either memory or network bound.</p>
+</blockquote>
+<p><strong>意思就是：</strong><br>
+因为 Redis 是基于内存的操作，CPU 不是 Redis 的瓶颈。Redis 的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且 CPU 不会成为瓶颈，那就顺理成章地采用单线程的方案了。</p>
+<p>为什么说不准确呢？</p>
+<p>我们需要回顾Redis的两个最重要的版本更新：</p>
+<ol>
+<li>
+<p><code>Redis 4.0</code> 为了防止耗时的命令阻塞线程，导致无法处理后续事件。引入了多线程来处理一些非阻塞命令。有：<code>UNLINK</code>、<code>FLUSHALL ASYNC</code>、<code>FLUSHDB ASYNC</code>等。<br>
+但是整个网络模型依然是单线程的，所以我们称之为单线程。</p>
+</li>
+<li>
+<p><code>Redis 6.0</code> 就真正的在网络模型上加入<code>多线程IO</code>来解决网络IO的性能瓶颈。
+此时IO读写是多线程的，执行命令依旧是单线程的。</p>
+</li>
+</ol>
+<h3 id="redis网络模型">Redis网络模型</h3>
+<p>一张图看懂Redis的单线程模型：</p>
+<p><img src="/img/redis/redis_io.png" alt="redis_io"></p>
+<p>redis的网络事件处理器是基于Reactor模式，又叫做文件事件处理器。</p>
+<p><code>文件事件处理器</code>使用<code>I/O多路复用</code>来同时监听多个套接字，并根据套接字执行的任务关联到不同的事件处理器。<br>
+文件事件以单线程方式运行，但通过使用<code>I/O多路复用</code>程序来监听多个套接字，<code>文件事件处理器</code>实现了高性能的网络通信模型。<br>
+Redis 在处理客户端的请求时，包括<code>接收</code>(socket读)、<code>解析</code>、<code>执行</code>、<code>发送</code>(socket 写) 等都由一个顺序串行的主线程处理，这就是所谓的<code>单线程</code>。</p>
+<h1 id="reactor模型">Reactor模型</h1>
+<p>Redis的单线程网络模型，这就是一个经典的Reactor的模型，其本质上是<code> I/O 多路复用(I/O multiplexing) + 非阻塞 I/O(non-blocking I/O)</code>的模式。</p>
+<p>是一种基于事件驱动模型的设计模式。</p>
+<p>我们来看一下Reactor里面两种经典的模型。</p>
+<h3 id="单线程reactor模型">单线程Reactor模型</h3>
+<p>Redis的单线程模型就是使用的经典的单线程Reactor模型。</p>
+<p>我们先看看单线程的Reactor模型</p>
+<p><img src="/img/redis/reactor1.png" alt="redis"></p>
+<p>消息处理流程：</p>
+<ol>
+<li>Reactor对象通过<code>select/poll/epoll</code>等IO多路复用监控连接事件，收到事件后通过<code>dispatcher</code>事件分发器进行转发。</li>
+<li>如果是连接建立的事件，则由<code>acceptor</code>接受连接，并创建<code>Handler</code>处理后续事件。</li>
+<li>如果不是建立连接事件，则Reactor会分发调用<code>Handler</code>来响应。</li>
+<li>Handler会完成<code>read-&gt;解析-&gt;执行-&gt;send</code>的完整业务流程。</li>
+</ol>
+<p>优点：</p>
+<ul>
+<li>单线程运行，串行操作，不需要加锁，逻辑简单。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>仅用一个线程处理请求，对于多核资源机器来说是有点浪费的。</li>
+<li>当处理读写任务的线程负载比较重，将会阻塞后续的事件处理，导致整体延迟变大。</li>
+</ul>
+<p>应用：</p>
+<ul>
+<li>Redis网络模型。（6.0版本以前）</li>
+</ul>
+<h3 id="master-worker-reactor模型">Master-Worker Reactor模型</h3>
+<p><img src="/img/redis/reactor2.png" alt="redis"></p>
+<p>比起单线程模型，它是将Reactor分成两部分：</p>
+<ul>
+<li><code>mainReactor</code> 负责监听server socket，用来处理网络IO连接建立操作，将建立的socketChannel指定注册给subReactor。 <strong>（只负责监听）</strong></li>
+<li><code>subReactor</code> 主要做和建立起来的socket做数据交互和事件业务处理操作。通常，subReactor个数上可与CPU个数等同。一般是多个，这样的话，就可以充分利用多核的优势。 <strong>（负责IO读写和命令的执行）</strong></li>
+</ul>
+<p>区别于<code>单线程Reactor模式</code>，这种模式不再是单线程的事件循环，而是有多个线程<code>subReactors</code>各自维护一个独立的事件循环，由 <code>mainReactor</code> 负责接收新连接并分发给 <code>subReactors</code> 去独立处理，最后 <code>subReactors</code> 回写响应给客户端。</p>
+<p>优点：</p>
+<ul>
+<li>响应快，不必为单个同步时间所阻塞，虽然Reactor本身依然是同步的；</li>
+<li>可扩展性，可以方便地通过增加Reactor实例个数来充分利用CPU资源；</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>如果多个线程可能操作同一份数据，就涉及到底层数据同步的问题，则必然会引入某些同步机制，比如锁。增加了代码复杂度，同时增加了同步机制的开销。</li>
+</ul>
+<p>应用：</p>
+<ul>
+<li>Nginx, Netty, Swoole, Memcached就是使用的这个模型</li>
+</ul>
+<h1 id="redis-60的多线程网络模型">Redis 6.0的多线程网络模型</h1>
+<p>Redis 6.0版本之后，Redis 正式在核心网络模型中引入了多线程，也就是所谓的 <code>I/O threading</code>，至此 Redis 真正拥有了多线程模型。
+但是Redis的多线程模型却并非标准的<code>Master-Worker Reactor</code>模型。他的多线程 <strong>只负责IO读写，不负责具体的执行。</strong></p>
+<h3 id="为什么redis-60-要使用多线程">为什么Redis 6.0 要使用多线程</h3>
+<p>之前说了，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存大小和网络带宽。
+从Redis自身角度来说，因为读写网络的<code>read/write</code>系统调用占用了Redis执行期间大部分CPU时间，瓶颈主要在于网络的 IO 消耗, 所以选择多线程IO来实现读写。主线程来执行Redis命令。</p>
+<p><strong>总结就是：</strong><br>
+将主线程 IO 读写任务拆分出来给一组独立的线程处理，使得多个 socket 读写可以并行化，但是 Redis 命令还是主线程串行执行。</p>
+<h3 id="redis-60-网络模型">Redis 6.0 网络模型</h3>
+<p><img src="/img/redis/reactor3.png" alt="redis"></p>
+<p><strong>为什么这么设计呢？</strong></p>
+<ol>
+<li>前面提到 Redis 最初选择单线程网络模型的理由是：CPU 通常不会成为性能瓶颈，瓶颈往往是内存和网络，因此单线程足够了。那么为什么现在 Redis 又要引入多线程呢？很简单，就是 Redis 的<code>网络 I/O 瓶颈</code>已经越来越明显了。所以这个多线程是为了<code>解决IO的瓶颈</code>的。</li>
+<li>如果多线程包括了<code>IO读写，解析和执行</code>的整个过程，那么多线程需要面临线程安全的问题，Redis 6.0版本之前是没有考虑线程安全的，如果使用多线程来处理命令的执行，需要大量的改动来保证多线程的安全机制，实现更复杂。为了避免了不必要的上下文切换和竞争条件，多线程导致的切换而消耗 CPU，也不用考虑各种锁的问题，就让执行这一步只使用主线程。</li>
+</ol>
+<h3 id="redis-60和memcached多线程模型对比">Redis 6.0和Memcached多线程模型对比</h3>
+<p>相同点：</p>
+<ul>
+<li>都采用了 Master-Worker 的线程的模型</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>Memcached 执行主逻辑也是在 Worker 线程里，模型更加简单，实现了真正的线程隔离，通过各种锁机制来保证数据的线程安全。</li>
+<li>而 Redis 把执行逻辑交还给 Master 线程，虽然一定程度上增加了模型复杂度，但也解决了数据的线程安全问题。</li>
+</ul>
+<h1 id="总结">总结</h1>
+<p>让我们来回顾一下 Redis 多线程网络模型的设计方案：</p>
+<ul>
+<li>使用 I/O 线程实现网络 I/O 多线程化，I/O 线程只负责网络 I/O 和命令解析，不执行具体的命令。</li>
+</ul>
+<p>Redis 的多线程网络模型实际上并不是一个标准的 <code>Master-Worker Reactor</code> 模型，Redis 的多线程方案中，I/O 线程任务仅仅是通过 socket 读取客户端请求命令并解析，却没有真正去执行命令。</p>
+<p>所有客户端命令最后还需要回到<code>主线程去执行</code>，因此对多核的利用率并不算高，而且每次主线程都必须在分配完任务之后忙轮询等待所有 I/O 线程完成任务之后才能继续执行其他逻辑。</p>
+<p>Redis 目前的多线程方案更像是一个折中的选择：既保持了原系统的兼容性，又能利用多核提升 I/O 性能，来解决网络IO的性能瓶颈。</p>
+<p>&lt;全文完&gt;</p>
+
+        </div>
+
+        
+        
+
+
+
+        
+        
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/personal/wechat_pay.png">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+
+        <footer class="post-footer">
+          
+
+
+          
+          <nav class="post-nav">
+            
+              <a class="prev" href="/post/system_design/short_url/">
+                
+                <i class="iconfont">
+                  <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+                </i>
+                <span class="prev-text nav-default">后端面试之系统设计-短网址（Short URL）服务怎么设计？</span>
+                <span class="prev-text nav-mobile">上一篇</span>
+              </a>
+            
+              <a class="next" href="/post/tech/cp/">
+                <span class="next-text nav-default">后端面试之Linux-cp和mv命令的区别</span>
+                <span class="prev-text nav-mobile">下一篇</span>
+                
+                <i class="iconfont">
+                  <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+                </i>
+              </a>
+          </nav>
+        </footer>
+      </article>
+
+      
+      
+        
+      
+
+
+      
+      
+
+  
+
+  
+  
+
+  
+  
+    <div class="post">
+  <script src="https://utteranc.es/client.js"
+        repo= "techxiaofei/techxiaofei.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>
+
+  
+
+  
+
+  
+
+    
+
+  
+
+  
+
+
+    </div>
+
+    
+    <nav class="toc" id="toc">
+    <div class="toc-title">文章目录</div>
+    <div class="toc-content custom-scrollbar">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#redis是什么">Redis是什么</a></li>
+        <li><a href="#为什么用redis">为什么用Redis</a></li>
+        <li><a href="#redis为什么快">Redis为什么快</a></li>
+        <li><a href="#redis是单线程的吗">Redis是单线程的吗</a></li>
+        <li><a href="#redis网络模型">Redis网络模型</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#单线程reactor模型">单线程Reactor模型</a></li>
+        <li><a href="#master-worker-reactor模型">Master-Worker Reactor模型</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#为什么redis-60-要使用多线程">为什么Redis 6.0 要使用多线程</a></li>
+        <li><a href="#redis-60-网络模型">Redis 6.0 网络模型</a></li>
+        <li><a href="#redis-60和memcached多线程模型对比">Redis 6.0和Memcached多线程模型对比</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </nav>
+
+
+  </div>
+
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="icon-links">
+  
+  
+    <a href="https://www.youtube.com/@techxiaofei" rel="me noopener" class="iconfont"
+      title="youtube"  target="_blank"
+      >
+      <svg
+  class="icon" style="" viewBox="0 0 36 36" version="1.1" width="36"
+  height="36" id="svg8">
+  <path
+      style=""
+      d="m 1.8724447,28.346305 c -1.89825625,-2.287259 -1.89825625,-18.4053514 0,-20.6926103 C 3.0356132,6.2521624 5.4948113,6 18,6 35.952296,6 35.5,5.6898541 35.5,18 35.5,30.310146 35.952296,30 18,30 5.4948113,30 3.0356132,29.747838 1.8724447,28.346305 Z M 19.113845,20.815859 C 21.25123,19.614581 23,18.347445 23,18 23,17.348349 15.706815,13 14.613845,13 14.27623,13 14,15.25 14,18 c 0,2.75 0.27623,5 0.613845,5 0.337616,0 2.362616,-0.982863 4.5,-2.184141 z"
+      id="rect824"/>
+</svg>
+
+    </a>
+  
+    <a href="https://space.bilibili.com/49756120" rel="me noopener" class="iconfont"
+      title="bilibili"  target="_blank"
+      >
+      <svg
+  class="icon" style="" viewBox="0 0 1024 1024" version="1.1" width="36"
+  height="36" id="svg8">
+  <path
+      style=""
+      d="M 744.60599,0.00486267 A 41.779915,41.779915 0 0 0 710.4184,18.673394 L 548.5048,255.32642 h -11.70046 a 41.779915,41.779915 0 0 0 -10.80295,-7.84928 L 235.66,97.084498 a 41.779915,41.779915 0 0 0 -20.07193,-4.960864 41.779915,41.779915 0 0 0 -18.3748,79.145436 L 359.4859,255.32642 H 128.16909 c -49.458302,0 -89.27932,39.82105 -89.27932,89.27932 v 508.65224 c 0,49.4583 39.821018,89.27934 89.27932,89.27934 h 19.48445 C 149.12802,984.5043 179.92773,1024 224.79179,1024 c 44.86407,0 75.66379,-39.4957 77.13826,-81.46268 H 719.98116 C 721.45559,984.5043 752.25533,1024 797.1194,1024 c 44.86406,0 75.6638,-39.4957 77.13824,-81.46268 h 21.57323 c 49.45831,0 89.27936,-39.82104 89.27936,-89.27934 V 344.60574 c 0,-49.45827 -39.82105,-89.27932 -89.27936,-89.27932 H 649.74567 L 779.38103,65.866924 A 41.779915,41.779915 0 0 0 744.60599,0.00486267 Z M 644.49108,418.70871 c 6.29985,0.21538 12.44451,2.01107 17.86888,5.22196 l 171.36218,98.10771 c 18.23417,10.21935 24.63334,33.34627 14.24614,51.48533 -10.38726,18.13909 -33.57344,24.32718 -51.61587,13.77296 L 624.9903,489.18895 c -15.21356,-8.41858 -22.66871,-26.1765 -18.03211,-42.93436 4.63664,-16.75784 20.15573,-28.14465 37.53289,-27.54588 z M 350.2006,432.31846 c 16.89952,0.0317 31.69582,11.33328 36.17844,27.62747 4.48262,16.2942 -2.44981,33.57765 -16.95507,42.24898 l -140.7157,86.91312 c -17.68528,11.18244 -41.09629,5.77692 -52.08912,-12.02686 -10.99282,-17.80373 -5.33855,-41.15658 12.58167,-51.95857 L 329.9002,438.2095 c 6.0643,-3.86439 13.10951,-5.90891 20.3004,-5.89104 z M 501.605,641.53985 c 3.75002,-0.15248 7.48645,0.53903 10.93349,2.0235 0.15842,0.0637 0.31618,0.12888 0.47325,0.19582 0.59328,0.27092 1.17574,0.56489 1.74609,0.88121 0.15868,0.0854 0.31643,0.17233 0.47325,0.2611 0.55694,0.32165 1.10131,0.66458 1.63185,1.02807 0.16455,0.1123 0.32777,0.2265 0.48956,0.34269 0.50382,0.36781 0.99371,0.75428 1.46868,1.15864 0.18724,0.15504 0.37218,0.31282 0.55484,0.47323 0.43271,0.38784 0.8518,0.79061 1.25653,1.20756 0.15449,0.16114 0.30679,0.32437 0.45693,0.48959 0.40798,0.44266 0.79989,0.89988 1.17494,1.37076 0.17799,0.22544 0.35205,0.45395 0.5222,0.68538 0.25932,0.34701 0.50964,0.70071 0.75064,1.06071 0.26712,0.39516 0.52286,0.79784 0.76699,1.20757 0.16907,0.29043 0.33231,0.58424 0.48957,0.88123 0.21836,0.41297 0.42513,0.83199 0.62009,1.25653 0.14836,0.32333 0.28983,0.64976 0.42429,0.97911 0.21319,0.51552 0.40915,1.03801 0.58747,1.5666 0.0677,0.19499 0.13296,0.39085 0.19582,0.58748 0.18652,0.60823 0.34984,1.22334 0.48957,1.84399 0.0397,0.16277 0.0779,0.32601 0.11423,0.48957 0.1436,0.69112 0.25788,1.38801 0.34269,2.08877 0.005,0.0381 0.0111,0.0761 0.0163,0.11424 0.0857,0.78056 0.13474,1.56471 0.14687,2.34988 0.005,0.0543 0.0111,0.10879 0.0163,0.1632 0,0 -0.008,1.12132 0,1.45234 0,0 -0.14697,17.84761 5.89102,34.12231 3.01902,8.13734 7.33278,15.10615 12.61433,19.61501 5.28157,4.50889 11.42894,7.62081 23.64572,7.62081 12.2168,0 18.36416,-3.11192 23.64573,-7.62081 5.28154,-4.50886 9.5953,-11.47767 12.6143,-19.61501 6.03799,-16.2747 5.89103,-34.12231 5.89103,-34.12231 -0.44885,-13.87045 10.45922,-25.46302 24.3311,-25.86506 13.87189,-0.40201 25.42828,10.53953 25.78348,24.41272 0,0 1.11929,25.7226 -9.00791,53.01927 -5.06359,13.64832 -13.1986,28.46036 -27.05631,40.29073 -13.85772,11.83039 -33.5454,19.63135 -56.20142,19.63135 -22.65603,0 -42.34371,-7.80096 -56.20141,-19.63135 -4.1801,-3.56856 -7.78733,-7.42433 -10.99878,-11.42303 -3.21235,4.00037 -6.81703,7.85309 -10.99876,11.42303 -13.85773,11.83039 -33.5454,19.63135 -56.20144,19.63135 -22.65601,0 -42.3437,-7.80096 -56.2014,-19.63135 -13.85775,-11.83037 -21.99272,-26.64241 -27.05632,-40.29073 -10.12725,-27.29667 -9.00789,-53.01928 -9.00789,-53.01927 0.20714,-13.83687 11.58744,-24.88848 25.42444,-24.69013 14.1263,0.19991 25.2971,12.0278 24.69011,26.14247 0,0 -0.14697,17.84761 5.89103,34.12231 3.01902,8.13734 7.31646,15.10615 12.598,19.61501 5.28155,4.50889 11.44526,7.62081 23.66203,7.62081 12.21681,0 18.36418,-3.11192 23.64573,-7.62081 5.28154,-4.50886 9.57899,-11.47767 12.598,-19.61501 5.76352,-15.53489 5.89112,-32.05691 5.89103,-33.56746 0.006,-0.37466 0.0111,-1.05336 0.0163,-1.20759 -0.0117,-0.74583 0.0105,-1.49177 0.0652,-2.23565 0.009,-0.15784 0.0204,-0.31561 0.0327,-0.47324 0.14204,-1.56859 0.43163,-3.12027 0.86487,-4.63449 0.0213,-0.0763 0.0433,-0.15244 0.0652,-0.22848 3.0335,-10.25748 12.24157,-17.46007 22.92769,-17.93417 z"
+      id="rect824"/>
+</svg>
+
+    </a>
+  
+    <a href="mailto:techxiaofei@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://www.techxiaofei.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+  
+</div>
+<div class="friend-links">
+  <span class="item-content"><b>友情链接：</b></span>
+  <a href="https://www.amazonaws.cn/" title="亚马逊云科技" target="_blank">亚马逊云科技</a>
+  <a href="https://dev.amazoncloud.cn/" title="亚马逊开发者社区" target="_blank">亚马逊开发者社区</a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2020 -
+    2023
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        码农小飞哥
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+      </footer>
+
+      <div class="button__back-to-top">
+        <a href="#back-to-top">
+          <i class="iconfont">
+            
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+          </i>
+        </a>
+      </div>
+    </div>
+    
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.5d67aa83a58c05cc573633b3bb7cb800a36ffd20e99032c7c9afd7eb7ddcb8b5.js" integrity="sha256-XWeqg6WMBcxXNjOzu3y4AKNv/SDpkDLHya/X633cuLU=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

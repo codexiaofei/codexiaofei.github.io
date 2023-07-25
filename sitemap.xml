@@ -1,0 +1,366 @@
+<?xml-stylesheet type="text/xsl" href="https://www.techxiaofei.com/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://www.techxiaofei.com/categories/</loc>
+    <lastmod>2023-01-16T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/</loc>
+    <lastmod>2023-01-16T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/script/py_auto/</loc>
+    <lastmod>2023-01-16T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2023-01-16T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/</loc>
+    <lastmod>2023-01-16T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2023-01-08T01:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/redis/zset/</loc>
+    <lastmod>2023-01-08T01:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/redis/redis_pdf/</loc>
+    <lastmod>2023-01-05T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/redis/fast/</loc>
+    <lastmod>2023-01-02T00:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/password/</loc>
+    <lastmod>2022-12-22T18:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/script/auto_booking/</loc>
+    <lastmod>2022-12-14T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tech/rand/</loc>
+    <lastmod>2022-07-06T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/golang/pass_by_value/</loc>
+    <lastmod>2022-07-02T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tech/protobuf/</loc>
+    <lastmod>2022-05-10T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/golang/time_after/</loc>
+    <lastmod>2022-05-06T00:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/singapore_life/pr/</loc>
+    <lastmod>2022-04-30T00:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2022-04-30T00:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/mysql/update_optimization/</loc>
+    <lastmod>2022-04-29T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/hotspot/</loc>
+    <lastmod>2022-04-27T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/unique_id_buffer/</loc>
+    <lastmod>2022-04-22T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tcpip/kcp/</loc>
+    <lastmod>2022-01-01T00:00:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/short_url/</loc>
+    <lastmod>2021-12-23T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/redis/multithreading/</loc>
+    <lastmod>2021-12-09T00:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tech/cp/</loc>
+    <lastmod>2021-12-07T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/mysql/table/</loc>
+    <lastmod>2021-12-04T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/backend/game_server/</loc>
+    <lastmod>2021-12-03T14:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/mysql/innodb/</loc>
+    <lastmod>2021-12-02T10:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/backend/backend_development/</loc>
+    <lastmod>2021-11-30T14:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/mysql/covering_index/</loc>
+    <lastmod>2021-11-26T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tcpip/close_shutdown/</loc>
+    <lastmod>2021-11-25T00:00:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tcpip/socket_read_write/</loc>
+    <lastmod>2021-11-25T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/lru/</loc>
+    <lastmod>2021-11-23T18:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/cpp/do_while/</loc>
+    <lastmod>2021-11-22T15:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/cpp/static/</loc>
+    <lastmod>2021-11-22T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/backend/game_development/</loc>
+    <lastmod>2021-11-21T14:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/cpp/secondary_pointer/</loc>
+    <lastmod>2021-11-21T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/about/</loc>
+    <lastmod>2021-11-21T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/friend/</loc>
+    <lastmod>2021-11-21T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tech/git_rebase/</loc>
+    <lastmod>2021-11-20T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/golang/goroutine_implementation/</loc>
+    <lastmod>2021-04-18T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/golang/append/</loc>
+    <lastmod>2021-03-20T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/golang/functional_options/</loc>
+    <lastmod>2021-02-18T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/golang/decorator/</loc>
+    <lastmod>2021-02-18T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/redis/redis_sds/</loc>
+    <lastmod>2021-02-17T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/bloom_filter/</loc>
+    <lastmod>2021-02-03T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/friends_comment_like/</loc>
+    <lastmod>2021-01-22T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/tech/vscode_leetcode/</loc>
+    <lastmod>2020-12-12T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/redis/redis_zset_score/</loc>
+    <lastmod>2020-12-04T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/system_design/snowflake/</loc>
+    <lastmod>2020-11-24T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/post/mysql/db_tidb_write_conflict/</loc>
+    <lastmod>2020-08-06T13:00:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.techxiaofei.com/archives/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>
