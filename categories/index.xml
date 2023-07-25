@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 码农小飞哥</title>
-    <link>https://www.techxiaofei.com/categories/</link>
+    <link>https://codexiaofei.github.io/categories/</link>
     <description>Recent content in Categories on 码农小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 16 Jan 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://www.techxiaofei.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Jan 2023 13:00:51 +0800</lastBuildDate><atom:link href="https://codexiaofei.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>脚本工具</title>
-      <link>https://www.techxiaofei.com/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
+      <link>https://codexiaofei.github.io/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Mon, 16 Jan 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</guid>
+      <guid>https://codexiaofei.github.io/categories/%E8%84%9A%E6%9C%AC%E5%B7%A5%E5%85%B7/</guid>
       <description></description>
     </item>
     
     <item>
       <title>编程技术</title>
-      <link>https://www.techxiaofei.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</link>
+      <link>https://codexiaofei.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Sun, 08 Jan 2023 01:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://codexiaofei.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/</guid>
       <description></description>
     </item>
     
     <item>
       <title>新加坡生活</title>
-      <link>https://www.techxiaofei.com/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</link>
+      <link>https://codexiaofei.github.io/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</guid>
+      <guid>https://codexiaofei.github.io/categories/%E6%96%B0%E5%8A%A0%E5%9D%A1%E7%94%9F%E6%B4%BB/</guid>
       <description></description>
     </item>
     

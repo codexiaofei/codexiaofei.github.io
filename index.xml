@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>码农小飞哥</title>
-    <link>https://www.techxiaofei.com/</link>
+    <link>https://codexiaofei.github.io/</link>
     <description>Recent content on 码农小飞哥</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 16 Jan 2023 13:00:51 +0800</lastBuildDate>
     
-        <atom:link href="https://www.techxiaofei.com/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://codexiaofei.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python开发自动化抢购脚本--一键定场、抢课、预约、自动回复，它都能做</title>
-      <link>https://www.techxiaofei.com/post/script/py_auto/</link>
+      <link>https://codexiaofei.github.io/post/script/py_auto/</link>
       <pubDate>Mon, 16 Jan 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/script/py_auto/</guid>
+      <guid>https://codexiaofei.github.io/post/script/py_auto/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
@@ -31,7 +31,7 @@
 &lt;h2 id=&#34;原理&#34;&gt;原理&lt;/h2&gt;
 &lt;p&gt;我们先讲解一下原理，最后给大家贴一份参考代码。因为自动化的代码每个网站都不通用，但是原理是通用的，如果你理解了原理，那么用Python写一份脚本代码就非常容易了。&lt;/p&gt;
 &lt;p&gt;其实自动化脚本很简单，就是模拟HTTP网络请求。想要模拟HTTP请求就要先拿到HTTP请求的信息，怎么拿到呢。在Chrome浏览器中按F12进入开发者模式，在浏览器中的行为就被记录下来了。比如我们对这篇视频取消点赞，然后再点赞。看一下Network请求，就会发现这两个请求就是点赞和取消点赞的请求。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/script/auto/like.png&#34; alt=&#34;like&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/script/auto/like.png&#34; alt=&#34;like&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;curl命令执行&#34;&gt;cURL命令执行&lt;/h2&gt;
 &lt;p&gt;我们点击&lt;code&gt;copy -&amp;gt; copy as cURL&lt;/code&gt; 把请求复制下来&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl &amp;#39;https://api.bilibili.com/x/web-interface/archive/like&amp;#39; \
@@ -184,10 +184,10 @@
 &lt;h2 id=&#34;定场抢课预约的原理&#34;&gt;定场、抢课、预约的原理&lt;/h2&gt;
 &lt;p&gt;那我们来讲一下脚本定场、抢课、预约的原理，由于之前的视频已经讲过了，所以我这次就稍微简单讲解下，如果想了解细节的可以看我之前的视频和教程。&lt;/p&gt;
 &lt;p&gt;这是我们普通的流程，核心是&lt;code&gt;Token&lt;/code&gt;，每次用户登录都会产生一个Token在浏览器，以后的所有的&lt;code&gt;HTTPS&lt;/code&gt;请求都会带上这个Token，Token能识别是你这个用户的操作行为。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/script/auto/general_flow.png&#34; alt=&#34;like&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/script/auto/general_flow.png&#34; alt=&#34;like&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; &lt;code&gt;Token&lt;/code&gt;的过期时间取决于网站设置，有些网站的Token过期为1小时，有些网站的过期时间为1天，有些网站Token不过期。所以如果你的Token过期了，重新按F12拿到curl，把Cookie或者完整的curl替换一下就可以了。&lt;/p&gt;
 &lt;p&gt;这里是自动化的脚本流程，我们拿到token之后用脚本定时执行查询和预订的接口。查询到之后可以使用邮件通知你进行后续操作（付款等）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/script/auto/auto_flow.png&#34; alt=&#34;like&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/script/auto/auto_flow.png&#34; alt=&#34;like&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
 &lt;p&gt;每个网站代码并不完全通用，但是又了上面的curl转python的工具，其实你不需要做太多东西，只需要拿到token，然后解析HTTPS的返回值，根据你的条件来过滤即可。&lt;/p&gt;
 &lt;p&gt;如果需要发送邮件，配置你的邮件地址和授权码&lt;/p&gt;
@@ -222,10 +222,10 @@
     
     <item>
       <title>秒杀面试官系列 - Redis zset底层是怎么实现的</title>
-      <link>https://www.techxiaofei.com/post/redis/zset/</link>
+      <link>https://codexiaofei.github.io/post/redis/zset/</link>
       <pubDate>Sun, 08 Jan 2023 01:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/redis/zset/</guid>
+      <guid>https://codexiaofei.github.io/post/redis/zset/</guid>
       
         <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;如果Redis面试有什么必问的面试题，那么Zset的底层原理一定是排名前三的。&lt;/p&gt;
@@ -487,10 +487,10 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
     
     <item>
       <title>《Redis设计与实现》pdf</title>
-      <link>https://www.techxiaofei.com/post/redis/redis_pdf/</link>
+      <link>https://codexiaofei.github.io/post/redis/redis_pdf/</link>
       <pubDate>Thu, 05 Jan 2023 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/redis/redis_pdf/</guid>
+      <guid>https://codexiaofei.github.io/post/redis/redis_pdf/</guid>
       
         <description>&lt;p&gt;&lt;strong&gt;《Redis设计与实现》&lt;/strong&gt;
 链接：&lt;a href=&#34;https://drive.google.com/file/d/17DHOacBVF-MM_K6gpGXKBSPfK07CbmnI/view?usp=share_link&#34;&gt;https://drive.google.com/file/d/17DHOacBVF-MM_K6gpGXKBSPfK07CbmnI/view?usp=share_link&lt;/a&gt;&lt;/p&gt;
@@ -499,7 +499,7 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
 （不做推销，不需要买课，只要你要，直接发。）&lt;/p&gt;
 &lt;p&gt;**《Redis设计与实现》**对Redis的大多数单机功能以及所有多机功能的实现原理进行了介绍，展示了这些功能的核心数据结构以及关键的算法思想。&lt;/p&gt;
 &lt;p&gt;通过阅读本书，读者可以快速、有效地了解Redis的内部构造以及运作机制，这些知识可以帮助读者更好、更高效地使用Redis。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/general/redis_pdf.png&#34; alt=&#34;redis_pdf&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/general/redis_pdf.png&#34; alt=&#34;redis_pdf&#34;&gt;&lt;/p&gt;
 &lt;p&gt;本书主要分为四大部分。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;第一部分&lt;code&gt;“数据结构与对象”&lt;/code&gt; 介绍了Redis中的各种对象及其数据结构，并说明这些数据结构如何影响对象的功能和性能。&lt;/li&gt;
@@ -1228,10 +1228,10 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
     
     <item>
       <title>Redis为什么这么快 - 秒杀面试官系列</title>
-      <link>https://www.techxiaofei.com/post/redis/fast/</link>
+      <link>https://codexiaofei.github.io/post/redis/fast/</link>
       <pubDate>Mon, 02 Jan 2023 00:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/redis/fast/</guid>
+      <guid>https://codexiaofei.github.io/post/redis/fast/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
@@ -1244,9 +1244,9 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
 &lt;p&gt;你肯定听说过：Redis很快，有多快呢？&lt;/p&gt;
 &lt;p&gt;首先，Redis有多快？它的单机&lt;code&gt;QPS&lt;/code&gt;可达&lt;code&gt;100K&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;我们先来看看Redis官网的性能基准数据。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/fast/benchmark1.png&#34; alt=&#34;benchmark1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/fast/benchmark1.png&#34; alt=&#34;benchmark1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Redis在数据大小为&lt;code&gt;1000 byte&lt;/code&gt;的时候能达到&lt;code&gt;100K&lt;/code&gt;以上的QPS。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/fast/benchmark2.png&#34; alt=&#34;benchmark2&#34;&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/fast/benchmark2.png&#34; alt=&#34;benchmark2&#34;&gt;
 同时在&lt;code&gt;6K&lt;/code&gt;个同时连接的时候依旧能保持&lt;code&gt;50K&lt;/code&gt;以上的QPS。&lt;/p&gt;
 &lt;p&gt;而在同等机器配置下的MySQL的QPS大概在&lt;code&gt;2k ~ 4k&lt;/code&gt;左右。&lt;/p&gt;
 &lt;p&gt;所以Redis作为内存数据库优势就出来了。&lt;/p&gt;
@@ -1269,15 +1269,15 @@ ziplist是一个为Redis专门提供的底层数据结构之一，本身可以�
 &lt;/ol&gt;
 &lt;h1 id=&#34;基于内存&#34;&gt;基于内存&lt;/h1&gt;
 &lt;p&gt;我们来看看计算器硬件的运算速度。硬件的速度是金字塔模型，最慢的是机械硬盘，处理速度大概为1-10毫秒，最快的是寄存器，处理速度为0.3纳秒。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/fast/hardware.png&#34; alt=&#34;hardware&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/fast/hardware.png&#34; alt=&#34;hardware&#34;&gt;&lt;/p&gt;
 &lt;p&gt;而Redis使用&lt;code&gt;RAM内存&lt;/code&gt;储存的数据库。相对于数据存在磁盘的数据库，比如&lt;code&gt;MySQL&lt;/code&gt;，就省去磁盘磁盘I/O的消耗。MySQL等磁盘数据库，需要建立索引来加快查询效率。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/fast/speed.png&#34; alt=&#34;speed&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/fast/speed.png&#34; alt=&#34;speed&#34;&gt;&lt;/p&gt;
 &lt;p&gt;像Redis这样把数据存在内存中，读写都直接对数据库进行操作，天然地就比硬盘数据库少了到磁盘读取数据的这一步，而这一步恰恰是计算机处理I/O的瓶颈所在。&lt;/p&gt;
 &lt;p&gt;这也就是为什么Redis的QPS能达到&lt;code&gt;100K&lt;/code&gt;，而同等配置下的MySQL的单机性能只有&lt;code&gt;～4K&lt;/code&gt;的原因。&lt;/p&gt;
 &lt;h1 id=&#34;io多路复用&#34;&gt;IO多路复用&lt;/h1&gt;
 &lt;p&gt;什么是I/O多路复用？&lt;/p&gt;
 &lt;p&gt;IO多路复用其实就是一种同步IO模型，它实现了一个线程可以监视多个文件描述符；一旦某个文件描述符就绪，就能够通知应用程序进行相应的读写操作。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/fast/reactor.png&#34; alt=&#34;reactor&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/fast/reactor.png&#34; alt=&#34;reactor&#34;&gt;&lt;/p&gt;
 &lt;!--
 1. 我们有一些客户端连接Redis，会创建socket套接字
 2. 我们会有会有**文件事件处理器**来处理请求，当有连接进来的时候，Redis会创建与客户端对应的文件描述符然后监听这些文件描述符。
@@ -1300,7 +1300,7 @@ Redis 在处理客户端的请求时，包括&lt;code&gt;接收&lt;/code&gt;(soc
 &lt;p&gt;线程之间的轮换以及上下文切换是需要花费很多时间的。&lt;br&gt;
 单线程模型在这种情况下可以省去&lt;code&gt;上下文切换&lt;/code&gt;和&lt;code&gt;加锁&lt;/code&gt;的开销。&lt;/p&gt;
 &lt;p&gt;那Redis是不是单线程呢？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/fast/single_thread.png&#34; alt=&#34;single_thread&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/fast/single_thread.png&#34; alt=&#34;single_thread&#34;&gt;&lt;/p&gt;
 &lt;p&gt;2017年6月，Redis发布Redis 4.0，除了主处理线程，还会有一些线程来处理一些非阻塞命令，
 比如 &lt;code&gt;UNLINk&lt;/code&gt;，&lt;code&gt;FLUSHALL ASYNC&lt;/code&gt;，&lt;code&gt;FLUSHDB ASYNC&lt;/code&gt;等非阻塞删除操作。&lt;/p&gt;
 &lt;p&gt;2020年5月，Redis发布Redis 6.0， 支持&lt;code&gt;多线程IO&lt;/code&gt;来&lt;code&gt;接收&lt;/code&gt;，&lt;code&gt;发送&lt;/code&gt;和&lt;code&gt;解析&lt;/code&gt;命令，具体的执行命令仍然是单线程的。&lt;/p&gt;
@@ -1334,7 +1334,7 @@ Redis 在处理客户端的请求时，包括&lt;code&gt;接收&lt;/code&gt;(soc
 &lt;li&gt;SkipList&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;而每一种数据结构都会使用多种底层结构模型来实现。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/fast/structure.png&#34; alt=&#34;structure&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/fast/structure.png&#34; alt=&#34;structure&#34;&gt;&lt;/p&gt;
 &lt;p&gt;由于这些数据结构和底层模型的复杂性，每一个都可以单独制作一篇视频讲解，我这里就简单说一下其中的两种。&lt;/p&gt;
 &lt;h1 id=&#34;sds&#34;&gt;SDS&lt;/h1&gt;
 &lt;p&gt;String数据结构使用SDS底层实现，SDS是简单动态字符串。&lt;/p&gt;
@@ -1373,10 +1373,10 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
     
     <item>
       <title>后端面试之系统设计 - 用户密码如何储存在DB里</title>
-      <link>https://www.techxiaofei.com/post/system_design/password/</link>
+      <link>https://codexiaofei.github.io/post/system_design/password/</link>
       <pubDate>Thu, 22 Dec 2022 18:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/system_design/password/</guid>
+      <guid>https://codexiaofei.github.io/post/system_design/password/</guid>
       
         <description>&lt;p&gt;​​
 本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
@@ -1424,7 +1424,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;p&gt;所以说，明文储存密码是很不安全的，正常来说现在没有人会这么用。（以前经常还会爆出来）&lt;/p&gt;
 &lt;h1 id=&#34;用对称加密或者非对称加密函数加密储存密码&#34;&gt;用对称加密或者非对称加密函数加密储存密码&lt;/h1&gt;
 &lt;p&gt;我想大部分人都了解对称加密和非对称加密，那么用这两种加密算法可不可行呢？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/encryption.png&#34; alt=&#34;enrcyption&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/encryption.png&#34; alt=&#34;enrcyption&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;对称加密&#34;&gt;对称加密&lt;/h3&gt;
 &lt;p&gt;在对称加密算法中，数据发信方将明文（原始数据）和&lt;strong&gt;加密密钥&lt;/strong&gt;一起经过特殊加密算法处理后，使其变成复杂的加密密文发送出去。收信方收到密文后，若想解读原文，则需要使用加密用过的密钥及相同算法的逆算法对密文进行解密，才能使其恢复成可读明文。在对称加密算法中，使用的密钥只有一个，发收信双方都使用这个密钥对数据进行加密和解密，这就要求解密方事先必须知道加密密钥。&lt;/p&gt;
 &lt;p&gt;密钥需要安全储存，否则就有严重的泄漏风险。&lt;/p&gt;
@@ -1438,7 +1438,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;h1 id=&#34;用md5等hash函数进行密码加密&#34;&gt;用MD5等Hash函数进行密码加密&lt;/h1&gt;
 &lt;p&gt;首先解释一下：&lt;strong&gt;Hash&lt;/strong&gt; 算法是一种消息摘要算法，不是一种加密算法，但由于其单向运算，具有一定的不可逆性，成为加密算法中的一个构成部分。所以为了通俗易懂，我们在本文中可以把MD5等Hash算法理解为加密算法。&lt;/p&gt;
 &lt;p&gt;MD5是一种Hash算法，也是最常用的一种消息摘要和数字签名算法，常常用于&lt;strong&gt;保存密码&lt;/strong&gt;以及&lt;strong&gt;生成数字签名&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/MD5.png&#34; alt=&#34;MD5&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/MD5.png&#34; alt=&#34;MD5&#34;&gt;&lt;/p&gt;
 &lt;p&gt;MD5 算法具有以下特点：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;压缩性：任意长度的数据，算出的 MD5 值长度都是固定的（128 bit）。&lt;/li&gt;
@@ -1467,11 +1467,11 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;li&gt;彩虹表攻击&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;也有不少网站可以直接进行 MD5 解密。就是用上述三种方法中之一。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/md5_decryption.png&#34; alt=&#34;md5_decryption&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/md5_decryption.png&#34; alt=&#34;md5_decryption&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.somd5.com/&#34;&gt;MD5解密链接&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;穷举法&#34;&gt;穷举法&lt;/h3&gt;
 &lt;p&gt;顾名思义就是穷举所有的明文生成MD5码，然后用MD5码跟泄漏的MD5对比。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/loop.png&#34; alt=&#34;loop&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/loop.png&#34; alt=&#34;loop&#34;&gt;&lt;/p&gt;
 &lt;p&gt;比如我上面列出的这个&lt;code&gt;123456&lt;/code&gt;的MD5的值&lt;code&gt;E10ADC3949BA59ABBE56E057F20F883E&lt;/code&gt;，虽然我没办法从MD5推出它是的原文是123456，但是我可以使用很多方法来得到它的原文&lt;code&gt;123456&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;第一步就是穷举法&lt;/p&gt;
 &lt;p&gt;比如我们穷举6位数数字。&lt;/p&gt;
@@ -1485,12 +1485,12 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;p&gt;这种只适合在明文很小的情况下适用。比如&lt;code&gt;6位数字密码&lt;/code&gt;。&lt;/p&gt;
 &lt;h3 id=&#34;字典攻击法&#34;&gt;字典攻击法&lt;/h3&gt;
 &lt;p&gt;固定长度的密码是有限集，所以生成的MD5值也是有限集。如果你的密码长度很小。那么完全可以生成一个&lt;code&gt;字典表&lt;/code&gt;来做一个明文和密文的映射。拿到这个密文之后匹配明文就可以得到你的密码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/dict.png&#34; alt=&#34;dict&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/dict.png&#34; alt=&#34;dict&#34;&gt;&lt;/p&gt;
 &lt;p&gt;字典表就是提前构建一个 &lt;strong&gt;明文 ⇨ 密文&lt;/strong&gt; 对应关系的一个大型数据库，破解时通过密文直接反查明文。但存储一个这样的数据库，空间成本是惊人的。&lt;/p&gt;
 &lt;p&gt;密码长度越大这个有限集越大，需要生成的&lt;code&gt;字典表&lt;/code&gt;就越大，匹配明文的难度也就越大。所以记得设置密码的时候设置的长一点，同时多用点特殊字符。这样破解的难度会变大。你知道为什么了吧。&lt;/p&gt;
 &lt;p&gt;字典攻击法很简单，但是它的限制就是：面对储了大量密码的系统时会非常乏力（储存用于逆向查找的所有选项以及搜索大型数据库十分困难）。&lt;/p&gt;
 &lt;h3 id=&#34;彩虹表攻击&#34;&gt;彩虹表攻击&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/rainbow_table.png&#34; alt=&#34;rainbow_table&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/rainbow_table.png&#34; alt=&#34;rainbow_table&#34;&gt;&lt;/p&gt;
 &lt;p&gt;虽然在一定长度内的密码是有限集，但是长度增加的时候那个集合所占用的空间也是不可估量的。&lt;/p&gt;
 &lt;p&gt;而&lt;strong&gt;彩虹表&lt;/strong&gt;是在&lt;strong&gt;字典法&lt;/strong&gt;的基础上改进，以时间换空间。是现在破解哈希函数常用的办法。&lt;/p&gt;
 &lt;p&gt;彩虹表是用于加密散列函数逆运算的预先计算好的表，常用于破解加密过的密码散列。彩虹表常常用于破解长度固定且包含的字符范围固定的密码（如信用卡、数字等）。这是以空间换时间的典型实践，比暴力破解（Brute-force attack）用的时间少，空间更多；但与储存密码空间中的每一个密码及其对应的哈希值（Hash）实现的查找表相比，其花费的时间更多，空间更少。使用加盐的密钥派生函数可以使这种攻击难以实现。&lt;/p&gt;
@@ -1530,13 +1530,13 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;根据安全级别，salt可以设置为固定值或者每一个用户不同的值，这个值一般为用户数据行的某一个固定值且对用户不可见的值，千万不要用username作为salt。这种如果有人知道了加salt的算法，那就跟普通的MD5没啥区别了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/md5_salt.png&#34; alt=&#34;md5_salt&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/md5_salt.png&#34; alt=&#34;md5_salt&#34;&gt;&lt;/p&gt;
 &lt;p&gt;每个salt都是独一无二的，随机生成的字符串，在哈希过程中添加到每个密码中。由于salt对于每个用户而言都是唯一的，因此，即使两个用户的密码是一样的&lt;code&gt;123456&lt;/code&gt;，因为每个用户都有自己独立的 &lt;strong&gt;salt&lt;/strong&gt;，所以最终储存在DB里面的&lt;code&gt;password&lt;/code&gt;也是不一样的。&lt;/p&gt;
 &lt;h3 id=&#34;预防彩虹表攻击&#34;&gt;预防彩虹表攻击&lt;/h3&gt;
 &lt;p&gt;salt还可以防止攻击者使用预先计算的彩虹表。最后，使用salt意味着无法在不破解哈希的情况下确定两个用户是否具有相同的密码，因为即使密码相同，不同的salt也会导致不同的哈希结果。&lt;/p&gt;
 &lt;p&gt;当然随着计算机硬件的飞速发展，现代CPU的运算速度越来越快，这种破解只会越来越容易。&lt;/p&gt;
 &lt;h3 id=&#34;密码验证流程&#34;&gt;密码验证流程&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/pwd_verification.png&#34; alt=&#34;pwd_verification&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/pwd_verification.png&#34; alt=&#34;pwd_verification&#34;&gt;&lt;/p&gt;
 &lt;p&gt;用户使用电脑输入账号密码（username+pwd），发送HTTPS网络请求，服务器收到请求后根据username查询数据库，匹配到一条数据，然后使用&lt;strong&gt;pwd&lt;/strong&gt;和数据库里的独有的&lt;strong&gt;salt&lt;/strong&gt; 进行&lt;strong&gt;MD5&lt;/strong&gt;运算，得到的结果和数据库里面的&lt;strong&gt;password&lt;/strong&gt;进行对比，匹配则密码正确，返回登录成功。&lt;/p&gt;
 &lt;p&gt;不匹配则密码错误，返回登录失败。&lt;/p&gt;
 &lt;p&gt;这个流程还有一个问题，虽然我们数据库里面储存的数据已经是MD5进行Hash之后的字符串，但是接收到的HTTPS的网络请求的&lt;strong&gt;pwd&lt;/strong&gt;还是明文的，这样服务端的人员或者黑客也一样有机会能截取到密码明文，同样有安全隐患。&lt;/p&gt;
@@ -1555,7 +1555,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;li&gt;Bcrypt加密长度60位，MD5是32位，提高穷举难度。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;如图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/password/bcrypt.png&#34; alt=&#34;bcrypt&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/password/bcrypt.png&#34; alt=&#34;bcrypt&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我们明文字符串&lt;code&gt;123456&lt;/code&gt;经过10轮加密之后的密文如下：
 其中：&lt;/p&gt;
 &lt;ul&gt;
@@ -1585,13 +1585,13 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
     
     <item>
       <title>使用go语言开发自动化脚本 - 一键定场、抢购、预约、捡漏</title>
-      <link>https://www.techxiaofei.com/post/script/auto_booking/</link>
+      <link>https://codexiaofei.github.io/post/script/auto_booking/</link>
       <pubDate>Wed, 14 Dec 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/script/auto_booking/</guid>
+      <guid>https://codexiaofei.github.io/post/script/auto_booking/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。
-&lt;img src=&#34;https://www.techxiaofei.com/img/personal/header.png&#34; alt=&#34;header&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://codexiaofei.github.io/img/personal/header.png&#34; alt=&#34;header&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
 &lt;!-- 亲爱的小伙伴大家好 --&gt;
 &lt;p&gt;不知道大家有没有这种经历，想要抢课，定场，发现抢不到，想要捡漏，又要随时刷，今天我就来讲一下我是怎么使用Go语言开发自动化脚本来解决定场，抢购，预约的难题。&lt;/p&gt;
@@ -1602,7 +1602,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;h3 id=&#34;浏览器发送http请求&#34;&gt;浏览器发送HTTP请求&lt;/h3&gt;
 &lt;p&gt;我们在浏览器中打开一个网站执行一系列操作，其实就是用户通过浏览器与网站服务器的HTTP交互的过程。&lt;/p&gt;
 &lt;p&gt;下图是一个最简单的流程：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/app/http_flow.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/app/http_flow.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;用户在浏览器输入账号密码登录（也可能是扫描二维码或者第三方账号登录），然后浏览器会发送一个HTTP请求到网站服务器，网站服务器验证成功之后根据你的账号信息生成一个&lt;code&gt;Token&lt;/code&gt;或者&lt;code&gt;Session&lt;/code&gt;，然后把&lt;code&gt;Token&lt;/code&gt;或者&lt;code&gt;SessionID&lt;/code&gt;返回给浏览器并告诉浏览器登录成功，浏览器跳转登录后的页面。 &lt;!-- Token和Session的区别 --&gt;&lt;/li&gt;
 &lt;li&gt;用户点击查询，比如查询是否有合适的Slot，浏览器发送查询HTTP请求给网站服务器，带上&lt;code&gt;Token&lt;/code&gt;，&lt;code&gt;Token&lt;/code&gt;是用来验证这个用户是谁，服务器验证成功之后返回可以预定的列表。比如一个可预订的时间列表。&lt;/li&gt;
@@ -1612,7 +1612,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;h3 id=&#34;自动化流程&#34;&gt;自动化流程&lt;/h3&gt;
 &lt;p&gt;理解了这个最简单的流程，那我们就可以开始想怎么样自动化流程。&lt;/p&gt;
 &lt;p&gt;最简单的情况就是：我们把查询和预订的过程自动化。当然登录的过程也是可以的，只不过很多第三方/二维码登录的，有时候还需要验证码，比较复杂，为了简单我就自己通过浏览器登录拿到Token之后自动查询和预订。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/app/http_flow_auto.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/app/http_flow_auto.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;登录成功后拿到Token。&lt;/li&gt;
 &lt;li&gt;脚本使用这个Token运行脚本工具，循环执行查询和预订的HTTP命令，如果预订成功，邮件通知给用户。&lt;/li&gt;
@@ -1634,14 +1634,14 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;h4 id=&#34;开发者模式&#34;&gt;开发者模式&lt;/h4&gt;
 &lt;p&gt;在&lt;strong&gt;Chrome&lt;/strong&gt;浏览器使用&lt;code&gt;F12&lt;/code&gt;进入开发者模式，选择&lt;strong&gt;Network&lt;/strong&gt;-&amp;gt;找到HTTP请求的Name-&amp;gt;可以看到右边有&lt;strong&gt;Header、Preview、Response&lt;/strong&gt;等信息，这就是用户行为（点击事件）产生的网络交互，也就是浏览器向服务器请求数据并返回给浏览器的过程。&lt;/p&gt;
 &lt;p&gt;而我们要模拟的就是这个HTTP网络交互的行为。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/app/copy_as_curl.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/app/copy_as_curl.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
 &lt;p&gt;找到你要模拟的HTTP请求的Name，右键-&amp;gt;&lt;code&gt;Copy&lt;/code&gt;-&amp;gt;&lt;code&gt;Copy As cURL&lt;/code&gt;。&lt;/p&gt;
 &lt;h4 id=&#34;curl&#34;&gt;cURL&lt;/h4&gt;
 &lt;p&gt;&lt;code&gt;cURL&lt;/code&gt;是一个Linux命令，开发人员使用它来与服务器进行数据交互，&lt;strong&gt;cURL&lt;/strong&gt; 里面包括 url, body, header, 加密方式 等等，正确设置命令后执行即可得到服务器的正确响应。&lt;/p&gt;
 &lt;p&gt;拿到cURL我们可以写go语言代码来模拟HTTP请求，要自己填充Header，Body等信息。容易写错。庆幸的是，已经有人做了自动化的工具帮我们一键把cURL转成Go语言的代码，也就是说我们不用自己写具体的HTTP请求代码了。&lt;/p&gt;
 &lt;p&gt;网站地址：&lt;a href=&#34;https://mholt.github.io/curl-to-go/&#34;&gt;curl-to-go&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们把cURL复制到网站里面就可以实时得到具体的Go代码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/app/curl_to_go.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/app/curl_to_go.png&#34; alt=&#34;http flow&#34;&gt;&lt;/p&gt;
 &lt;p&gt;当然这个工具只帮我们创建了Body的结构体，具体的值还是需要我们去填充，我们从curl里面找到
 &lt;code&gt;--data-raw&lt;/code&gt;来自己填进去即可。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -1731,7 +1731,7 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
 &lt;/div&gt;&lt;h3 id=&#34;代码&#34;&gt;代码&lt;/h3&gt;
 &lt;p&gt;整个流程清楚了，那么下一步就是打开你的编辑器，来实现代码了。我这里实现了一个网站的预订的代码，来给大家讲解一下，登录我并没有实现，而是使用&lt;code&gt;curl to go&lt;/code&gt; 生成了Go语言代码并根据go struct改造具体条件。在Cookie没过期的情况下可以循环调用。&lt;/p&gt;
 &lt;p&gt;自动预订代码：&lt;a href=&#34;https://https://github.com/techxiaofei/autobooking&#34;&gt;github.com&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/app/auto_code.png&#34; alt=&#34;auto_flow&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/app/auto_code.png&#34; alt=&#34;auto_flow&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;query.go&lt;/code&gt;，查询的HTTP请求，把刚才&lt;code&gt;curl-to-go&lt;/code&gt;生成的Go代码Copy进来，填上Payload就可以请求成功了。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;book.go&lt;/code&gt;，把你刚才query的结果传进来，根据你的需求过滤满足条件的&lt;code&gt;Slot&lt;/code&gt;，直接预订即可。&lt;/li&gt;
@@ -1786,10 +1786,10 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
     
     <item>
       <title>如何用一个1-7随机数生成器制作一个1-8随机数生成器？</title>
-      <link>https://www.techxiaofei.com/post/tech/rand/</link>
+      <link>https://codexiaofei.github.io/post/tech/rand/</link>
       <pubDate>Wed, 06 Jul 2022 00:00:00 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/tech/rand/</guid>
+      <guid>https://codexiaofei.github.io/post/tech/rand/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -1978,10 +1978,10 @@ Redis使用SkipList而不是用平衡树的主要原因有：&lt;/p&gt;
     
     <item>
       <title>Golang是值传递还是引用传递</title>
-      <link>https://www.techxiaofei.com/post/golang/pass_by_value/</link>
+      <link>https://codexiaofei.github.io/post/golang/pass_by_value/</link>
       <pubDate>Sat, 02 Jul 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/golang/pass_by_value/</guid>
+      <guid>https://codexiaofei.github.io/post/golang/pass_by_value/</guid>
       
         <description>&lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
 &lt;p&gt;先说结论，Go里面没有&lt;code&gt;引用传递&lt;/code&gt;，Go语言是&lt;code&gt;值传递&lt;/code&gt;。很多技术博客说Go语言有引用传递，都是没真的理解Go语言。&lt;/p&gt;
@@ -2294,7 +2294,7 @@ inner1: 0x14000114030, 0x1400012e000, len:3, capacity:3
 inner2: 0x14000114030, 0x1400012c060, len:4, capacity:6
 outer2: 0x14000114018, 0x1400012e000, len:3, capacity:3
 [1 2 3]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/golang/slice/slice_set.png&#34; alt=&#34;slice&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/golang/slice/slice_set.png&#34; alt=&#34;slice&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;outer1: 外部传入一个&lt;code&gt;slice&lt;/code&gt;，引用类型，值传递。&lt;/li&gt;
 &lt;li&gt;inner1: 由于是值传递，所以arr的地址&lt;code&gt;&amp;amp;arr&lt;/code&gt;变了，但是两个arr指向的底层数组首元素&lt;code&gt;&amp;amp;arr[0]&lt;/code&gt;，也就是&lt;code&gt;array unsafe.Pointer&lt;/code&gt;。&lt;/li&gt;
@@ -2310,7 +2310,7 @@ inner2: 0x1400000c048, 0x1400001c050, len:4, capacity:5
 outer2: 0x1400000c030, 0x1400001c050, len:3, capacity:5
 [1 2 3]
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;虽然函数内部&lt;code&gt;append&lt;/code&gt;的结果同样不影响外部的输出，但是原理却不一样。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/golang/slice/slice_append.png&#34; alt=&#34;slice&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/golang/slice/slice_append.png&#34; alt=&#34;slice&#34;&gt;&lt;/p&gt;
 &lt;p&gt;不同点：&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;在内部调用&lt;code&gt;append&lt;/code&gt;的时候，由于&lt;code&gt;cap 容量&lt;/code&gt;足够，所以不需要扩容，在原地址空间增加一个元素，底层数组的首元素地址相同。&lt;/li&gt;
@@ -2349,10 +2349,10 @@ outer2: 0x1400000c030, 0x1400001c050, len:3, capacity:5
     
     <item>
       <title>protobuf是怎么序列化的</title>
-      <link>https://www.techxiaofei.com/post/tech/protobuf/</link>
+      <link>https://codexiaofei.github.io/post/tech/protobuf/</link>
       <pubDate>Tue, 10 May 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/tech/protobuf/</guid>
+      <guid>https://codexiaofei.github.io/post/tech/protobuf/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -2493,7 +2493,7 @@ message Student {
       WIRETYPE_END_GROUP = 4,     //deprecated
       WIRETYPE_FIXED32 = 5
    };
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/protobuf/wire_type.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/protobuf/wire_type.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这是各个&lt;code&gt;Wire Type&lt;/code&gt;对应的具体类型。&lt;/p&gt;
 &lt;p&gt;每个&lt;code&gt;Wire Type&lt;/code&gt;可以对应多个具体的数据类型，因为我们有&lt;code&gt;.proto&lt;/code&gt;文件，序列化和反序列化都是基于proto文件的，所以我们是明确知道类型的。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;问题：&lt;/strong&gt; 那为什么需要把&lt;code&gt;Wire Type&lt;/code&gt;编码到数据里面呢，因为不同的&lt;code&gt;Wire Type&lt;/code&gt;对应的&lt;code&gt;储存方式&lt;/code&gt;不同,可以通过序列化的&lt;code&gt;Wire Type&lt;/code&gt;知道后续的数据是怎么储存的。&lt;/p&gt;
@@ -2515,7 +2515,7 @@ message Student {
 &lt;li&gt;各字段存储得非常紧凑，存储空间利用率非常高。&lt;/li&gt;
 &lt;li&gt;如果某个字段没有被设置字段值，那么该字段在序列化时的数据中是&lt;code&gt;完全不存在&lt;/code&gt;的，即不需要编码，相应字段在解码时会被设置为默认值。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/protobuf/tag_length_value.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/protobuf/tag_length_value.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Tag 标签&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Tag 就是&lt;code&gt;字段标识号&lt;/code&gt;+&lt;code&gt;Wire Type&lt;/code&gt;的&lt;code&gt;Varint&lt;/code&gt;编码格式。最少1字节。&lt;/p&gt;
 &lt;p&gt;因为&lt;code&gt;Wire Type&lt;/code&gt;只有这6个定义，所以使用&lt;code&gt;3bit&lt;/code&gt;完全够用。 Tag的最低三位表示&lt;code&gt;Wire Type&lt;/code&gt;，高位表示&lt;code&gt;字段标识号&lt;/code&gt;, &lt;code&gt;Tag标签&lt;/code&gt;所占用的长度，取决于&lt;code&gt;字段标识号&lt;/code&gt;的大小。&lt;/p&gt;
@@ -2528,7 +2528,7 @@ Tag = (字段标识号 &amp;lt;&amp;lt; 3) | WireType
 &lt;h1 id=&#34;不同wire-type的数据序列化方式&#34;&gt;不同Wire Type的数据序列化方式&lt;/h1&gt;
 &lt;p&gt;下面我们就针对不同的Wir eType，来以一个个分析，我们的数据是怎么编码的。&lt;/p&gt;
 &lt;h3 id=&#34;wiretype--015时&#34;&gt;WireType = 0/1/5时&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/protobuf/tag_value.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/protobuf/tag_value.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
 &lt;p&gt;所有的Tag都是Varint，&lt;code&gt;Tag = (字段标识号 &amp;lt;&amp;lt; 3) | WireType&lt;/code&gt;。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;int32:&lt;/strong&gt;  Wire Type = 0, Value：Varint，变长，1-10字节。（最大64位Varint）。&lt;/li&gt;
@@ -2547,7 +2547,7 @@ Tag = (字段标识号 &amp;lt;&amp;lt; 3) | WireType
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;String类型&lt;/strong&gt;
 其中String类型使用UTF8编码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/protobuf/string.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/protobuf/string.png&#34; alt=&#34;Wire Type&#34;&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;message Test
 {
     ...
@@ -2565,7 +2565,7 @@ Test.setStr（“testing”）
 Length = 7
 Value = UTF8(&amp;#34;testing&amp;#34;) = 116, 101, 115, 116, 105, 110, 103
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;嵌套消息类型&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/protobuf/nest.png&#34; alt=&#34;nest&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/protobuf/nest.png&#34; alt=&#34;nest&#34;&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;message Test
 {
     ...
@@ -2593,9 +2593,9 @@ message Internal
     repeated int32 lists = 7 [packed=true];  // 表达方式2：带packed=true
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;也就是说&lt;code&gt;packed=true&lt;/code&gt;是专门针对标量数字类型做的一个编码空间优化策略。对于&lt;code&gt;proto3&lt;/code&gt;而言，它是默认使用的，对于&lt;code&gt;proto2&lt;/code&gt;而言，由于历史原因，它默认没有使用，需要手动使用。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/protobuf/packed_false.png&#34; alt=&#34;not packed&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/protobuf/packed_false.png&#34; alt=&#34;not packed&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我们看没有&lt;code&gt;packed&lt;/code&gt;的repeat，这几个Tag是完全一样的，因为它们有着&lt;code&gt;一样的字符标识&lt;/code&gt;和&lt;code&gt;Wire Type&lt;/code&gt;，是浪费空间的。所以才引入了&lt;code&gt;packed=true&lt;/code&gt;的修饰。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/protobuf/packed_true.png&#34; alt=&#34;packed&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/protobuf/packed_true.png&#34; alt=&#34;packed&#34;&gt;&lt;/p&gt;
 &lt;p&gt;使用Length代表Value列表的总字节长度，Value则使用Varint编码，多个Value连续储存。不需要每个Value前面放个相同的Tag，极大的节省了空间。&lt;/p&gt;
 &lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
 &lt;p&gt;讲解protobuf序列化，比我想象的占用了更多的篇幅，因为它的确有不少知识点要讲解，不懂这些知识点的情况下，很难深入理解这个流程。我已经尽量简化我的描述，同时能让人一眼看懂。&lt;/p&gt;
@@ -2630,10 +2630,10 @@ Tag是需要占字节空间的。如果&lt;code&gt;字段标识号&amp;gt;15&lt;
     
     <item>
       <title>Golang time.After内存泄漏分析</title>
-      <link>https://www.techxiaofei.com/post/golang/time_after/</link>
+      <link>https://codexiaofei.github.io/post/golang/time_after/</link>
       <pubDate>Fri, 06 May 2022 00:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/golang/time_after/</guid>
+      <guid>https://codexiaofei.github.io/post/golang/time_after/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -2745,7 +2745,7 @@ Tag是需要占字节空间的。如果&lt;code&gt;字段标识号&amp;gt;15&lt;
 &lt;/div&gt;&lt;p&gt;咱也别管代码优不优雅，就很简单的逻辑，先往channel里面存数据，然后不停的使用&lt;code&gt;for select case&lt;/code&gt;语法从channel里面取数据。&lt;/p&gt;
 &lt;p&gt;我相信大家一眼就能看懂。就是这么简单的代码却会导致内存泄漏。&lt;/p&gt;
 &lt;p&gt;那么我们使用&lt;code&gt;top&lt;/code&gt;指令看看:
-&lt;img src=&#34;https://www.techxiaofei.com/img/golang/time_after.png&#34; alt=&#34;top&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://codexiaofei.github.io/img/golang/time_after.png&#34; alt=&#34;top&#34;&gt;&lt;/p&gt;
 &lt;p&gt;发现我们的进程&lt;code&gt;MEM&lt;/code&gt;这一列的值迅速增加，不到一分钟就占用了6G的内存，明显产生了内存泄漏。&lt;/p&gt;
 &lt;h1 id=&#34;原理分析&#34;&gt;原理分析&lt;/h1&gt;
 &lt;p&gt;要了解为什么会产生内存泄漏，我们需要看看&lt;code&gt;time package&lt;/code&gt;里面&lt;code&gt;time.After&lt;/code&gt;函数的的定义。&lt;a href=&#34;https://pkg.go.dev/time&#34;&gt;https://pkg.go.dev/time&lt;/a&gt;&lt;/p&gt;
@@ -2866,14 +2866,14 @@ Tag是需要占字节空间的。如果&lt;code&gt;字段标识号&amp;gt;15&lt;
     
     <item>
       <title>[2022] 终于拿到新加坡PR，记录一下</title>
-      <link>https://www.techxiaofei.com/post/singapore_life/pr/</link>
+      <link>https://codexiaofei.github.io/post/singapore_life/pr/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/singapore_life/pr/</guid>
+      <guid>https://codexiaofei.github.io/post/singapore_life/pr/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;p&gt;终于拿到新加坡PR啦，也算是2022的一个欣慰。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/life/pr/ica.png&#34; alt=&#34;PR&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/life/pr/ica.png&#34; alt=&#34;PR&#34;&gt;&lt;/p&gt;
 &lt;p&gt;介绍一下基本情况，给想要申请PR的朋友们一个参考。&lt;/p&gt;
 &lt;p&gt;我是2019年8月份拿着EP准证来新加坡工作的。&lt;/p&gt;
 &lt;p&gt;2021年6月份和老婆（DP）一起申请新加坡PR，也就是说&lt;code&gt;一年零十个月&lt;/code&gt;开始申请的。&lt;/p&gt;
@@ -2924,10 +2924,10 @@ Tag是需要占字节空间的。如果&lt;code&gt;字段标识号&amp;gt;15&lt;
     
     <item>
       <title>后端面试必备 - MySQL更新优化的几个阶段</title>
-      <link>https://www.techxiaofei.com/post/mysql/update_optimization/</link>
+      <link>https://codexiaofei.github.io/post/mysql/update_optimization/</link>
       <pubDate>Fri, 29 Apr 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/mysql/update_optimization/</guid>
+      <guid>https://codexiaofei.github.io/post/mysql/update_optimization/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -3092,19 +3092,19 @@ WHEN userid IN (11000, 12000, 13000);
 &lt;li&gt;不写入DB，而写入Cache，并把userid记录在ZSET里面，以便后续的批量更新。&lt;/li&gt;
 &lt;li&gt;启动一个定时调度器，对1000个任务分片进行循环POP ZSET。取出userid的列表，执行批量更新。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/mysql/batch_update.png&#34; alt=&#34;batch_update&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/mysql/batch_update.png&#34; alt=&#34;batch_update&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;自动调度&#34;&gt;自动调度&lt;/h3&gt;
 &lt;p&gt;我们现在能执行批量更新了，但是调度器是单实例的。如果调度器宕机或者无法支撑这么高的数据量，依旧会出问题。&lt;/p&gt;
 &lt;p&gt;所以我们需要能自动调度，可以部署多台，且每台只负责一部分的&lt;code&gt;任务分片&lt;/code&gt;。同时任务分片不重复，不遗漏。由于定时器是彼此独立的，如果没有中央服务器来进行调度的话，我们很难保证增加或者减少调度器的时候能自动调整自己负责的区域。&lt;/p&gt;
 &lt;p&gt;这里我们使用了Kafka的Partition机制来进行调度。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;众所周知&lt;/code&gt;，小学二年级我们学过，当Kafka的同一个group消费同一个topic消息的时候，每个consumer会负责1到多个partition，我们增加或者减少consumer的时候，会自动调整消费的partiton。所以我们的consumer的数量要小于等于partition的数量，否则有些consumer会无法消费消息。&lt;/p&gt;
 &lt;p&gt;这里我们有10个partition，三个consumer，如果增加或者减少一个consumer，partition会自动重新分配，保证consumer和partition一对多的映射关系。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/mysql/kafka_partition.png&#34; alt=&#34;kafka_partition&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/mysql/kafka_partition.png&#34; alt=&#34;kafka_partition&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我们利用Consumer负责的partition自动调整的机制，来实现我们的调度器。&lt;/p&gt;
 &lt;p&gt;假设，我们申请一个有10个partition的Kafka topic。我们初始化定时调度器的时候注册多个&lt;code&gt;Consumer&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;那么，这几个Consumer就负责10个partition。我们设计一个映射算法，10个partition映射到1000个&lt;code&gt;任务分片&lt;/code&gt;上面。这个算法是固定的，也就是Partition和任务分片一定是一对多的对应关系。&lt;/p&gt;
 &lt;p&gt;我们每次调整调度器数量的时候，比如增加一个调度器，就会额外注册一个Consumer，Partition就会重新分配，依然保证了consumer和partition一对多的映射关系。这样就自动调整了调度器负责的&lt;code&gt;任务分片&lt;/code&gt;的数量。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/mysql/kafka_scheduler.png&#34; alt=&#34;kafka_scheduler&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/mysql/kafka_scheduler.png&#34; alt=&#34;kafka_scheduler&#34;&gt;&lt;/p&gt;
 &lt;p&gt;而每一个任务分片就执行上述批量更新的流程，即使某一个&lt;code&gt;调度器&lt;/code&gt;宕机了，partition会自动分配到其他在线的Consumer上，导致其他的Consumer自动分配所有的Partition。最终依然会保证我们的调度器能够处理所有的任务分片。&lt;/p&gt;
 &lt;p&gt;用了这个批量更新的方式，我们的MySQL的&lt;code&gt;CPU，磁盘IO，网络IO&lt;/code&gt;都降低了80%以上。这也是我们更新的终极方案了。&lt;/p&gt;
 &lt;h1 id=&#34;结论&#34;&gt;结论&lt;/h1&gt;
@@ -3118,10 +3118,10 @@ WHEN userid IN (11000, 12000, 13000);
     
     <item>
       <title>谈一谈热点Key解决方案</title>
-      <link>https://www.techxiaofei.com/post/system_design/hotspot/</link>
+      <link>https://codexiaofei.github.io/post/system_design/hotspot/</link>
       <pubDate>Wed, 27 Apr 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/system_design/hotspot/</guid>
+      <guid>https://codexiaofei.github.io/post/system_design/hotspot/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -3150,7 +3150,7 @@ WHEN userid IN (11000, 12000, 13000);
 &lt;p&gt;我们的服务储存了买家/卖家的一些属性，比如卖家的优惠券就算一种。&lt;/p&gt;
 &lt;p&gt;但是在一些大促活动期间（双11等），有些热门卖家店铺的访问量就非常高，就导致了一些热点数据，其中几个Redis节点的CPU就直接100%使用率。&lt;/p&gt;
 &lt;p&gt;于是我们针对这类的热点数据，我们让它通过LRU缓存，来极大的缓解Redis和MySQL的压力。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/hot_key/lru_structure.png&#34; alt=&#34;LRU1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/hot_key/lru_structure.png&#34; alt=&#34;LRU1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如图：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;我们主要数据储存在DB，并缓存在Redis里面。使用Redis集群来分散储存数据。&lt;/li&gt;
@@ -3166,7 +3166,7 @@ WHEN userid IN (11000, 12000, 13000);
 &lt;/ul&gt;
 &lt;p&gt;当请求到达的时候，就看是否匹配热点标记（服务端标记+客户端标记），如果是热点数据，查询LRU缓存，如果命中直接返回。
 不命中就继续向Redis读取，并写入LRU，Redis如果也不命中就向MySQL读取，写入Redis。这样层层的方式，可以极大的减轻Redis和MySQL的压力。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/algorithm/lru_4.png&#34; alt=&#34;LRU1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/algorithm/lru_4.png&#34; alt=&#34;LRU1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我们优化之后，Redis非常稳定，再也没出现过单节点CPU过高的情况。&lt;/p&gt;
 &lt;h3 id=&#34;微博热搜&#34;&gt;微博热搜&lt;/h3&gt;
 &lt;p&gt;还有一种类似的场景就是微博热搜。
@@ -3183,7 +3183,7 @@ WHEN userid IN (11000, 12000, 13000);
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Key: user_info_{id} // 1. 非热点数据
 Key: user_info_{id}_[1,20]  // 2. 热点数据，会分散在不同的Redis节点上。
 Key: hot_key_list  // 3. 具体的热点key的列表，分布式服务器会定时拉取这个列表，以便服务器知道哪些Key是热点数据，可以做不同的访问处理。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/hot_key/hot_key_2.png&#34; alt=&#34;LRU1&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/hot_key/hot_key_2.png&#34; alt=&#34;LRU1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;一、关于热点Key列表同步。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;问题一&lt;/strong&gt;：set_hot_key可能访问任何一台Service，分布式的其他Service怎么知道哪些是hot_key呢？&lt;/p&gt;
 &lt;p&gt;数据是储存在Redis里面的，然后每台服务器会&lt;code&gt;定时拉取Redis的数据&lt;/code&gt;来保持同步。&lt;/p&gt;
@@ -3215,10 +3215,10 @@ hot_key_list = {id1: expire_time, id2: expire_time, id3: expire_time, ...}
     
     <item>
       <title>放弃snowflake-我们重新设计了新的分布式ID生成方案</title>
-      <link>https://www.techxiaofei.com/post/system_design/unique_id_buffer/</link>
+      <link>https://codexiaofei.github.io/post/system_design/unique_id_buffer/</link>
       <pubDate>Fri, 22 Apr 2022 13:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/system_design/unique_id_buffer/</guid>
+      <guid>https://codexiaofei.github.io/post/system_design/unique_id_buffer/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -3230,7 +3230,7 @@ hot_key_list = {id1: expire_time, id2: expire_time, id3: expire_time, ...}
 &lt;h3 id=&#34;snowflake算法&#34;&gt;snowflake算法&lt;/h3&gt;
 &lt;p&gt;雪花算法（Snowflake）是twitter公司内部分布式项目采用的ID生成算法，开源后广受国内大厂的好评，在该算法影响下各大公司相继开发出各具特色的分布式生成器。&lt;/p&gt;
 &lt;p&gt;Twitter的snowflake分布式ID的算法是目前广泛使用的分布式ID算法，尽管有很多变种，比如位数的不同，时间片大小不同、node bit数放在最后等各种变种，但是主要思想还是来自于snowflake的思想。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/server/snowflake.png&#34; alt=&#34;snowflake&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/server/snowflake.png&#34; alt=&#34;snowflake&#34;&gt;&lt;/p&gt;
 &lt;p&gt;snowflake算法采用64bit存储ID, 最高位备用，暂时不使用。接下来的&lt;code&gt;41 bit做时间戳&lt;/code&gt;，最小时间单位为&lt;code&gt;毫秒&lt;/code&gt;。再接下来的&lt;code&gt;10 bit做机器ID&lt;/code&gt;(worker id)，然后最后&lt;code&gt;12 bit&lt;/code&gt;在单位时间(毫秒)递增。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -3401,7 +3401,7 @@ unique_id = ms&amp;lt;&amp;lt;22 + last_insert_id%2^22
 &lt;h1 id=&#34;dbbuffer方案&#34;&gt;DB+Buffer方案&lt;/h1&gt;
 &lt;p&gt;综合对比上述几种方案，每种方案都不完全符合我们的要求。于是我们最终考虑了一种方案&lt;/p&gt;
 &lt;p&gt;首先我们依旧使用DB的方案，只是不是每次生成ID都需要访问DB，比如我们把ID分成&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/unique_id/db_buffer.png&#34; alt=&#34;db_buffer&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/unique_id/db_buffer.png&#34; alt=&#34;db_buffer&#34;&gt;&lt;/p&gt;
 &lt;p&gt;是不是跟snowflake算法有点类似，只不过我们不用&lt;code&gt;固定的机器ID&lt;/code&gt;，因为会限制服务器机器的数量。而是用了数据库自增ID，不与机器相绑定，每台机器自己去申请自增的ID。&lt;/p&gt;
 &lt;p&gt;Buffer的作用是什么呢，就是为了不要每次都去数据库申请ID，每一次申请ID都可以产生一个buffer以供下次使用的时候递增buffer的值，下次生成ID的时候就不需要访问DB了。&lt;/p&gt;
 &lt;p&gt;问题：&lt;/p&gt;
@@ -3461,7 +3461,7 @@ ms := time.Since(minTS).Nanoseconds() / 1000000
 &lt;h3 id=&#34;双buffer优化&#34;&gt;双buffer优化&lt;/h3&gt;
 &lt;p&gt;对于第一个缺点，我们做了一些优化，简单的说就是：&lt;/p&gt;
 &lt;p&gt;不要每次都用完Buffer再去数据库取下一个&lt;code&gt;自增ID&lt;/code&gt;,二是在Buffer用到一定程度就开始异步取下一个&lt;code&gt;自增ID&lt;/code&gt;, 提前缓存，做到ID生成完全在内存中操作，避免中途因为访问数据库导致的延迟抖动。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/unique_id/double_buffer.png&#34; alt=&#34;db_buffer&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/unique_id/double_buffer.png&#34; alt=&#34;db_buffer&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;初始化的时候的确只有一个&lt;code&gt;BufferPool current&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;当buffer指针走到一半(31)的时候，异步执行DB写入操作，拿到新的last_insert_id，把数据写入&lt;code&gt;BufferPool next&lt;/code&gt;&lt;/li&gt;
@@ -3481,10 +3481,10 @@ ms := time.Since(minTS).Nanoseconds() / 1000000
     
     <item>
       <title>KCP传输协议，快速可靠的UDP，和TCP比有什么优势？</title>
-      <link>https://www.techxiaofei.com/post/tcpip/kcp/</link>
+      <link>https://codexiaofei.github.io/post/tcpip/kcp/</link>
       <pubDate>Sat, 01 Jan 2022 00:00:02 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/tcpip/kcp/</guid>
+      <guid>https://codexiaofei.github.io/post/tcpip/kcp/</guid>
       
         <description>&lt;p&gt;​
 本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
@@ -3533,7 +3533,7 @@ TCP是为流量设计的（每秒内可以传输多少KB的数据），讲究的
 &lt;p&gt;KCP协议是一个纯粹的ARQ协议，通过重传机制实现UDP数据包的可靠传输。&lt;/p&gt;
 &lt;p&gt;在谈KCP协议的特征前，还是先贴一下KCP协议的数据段格式。&lt;/p&gt;
 &lt;h3 id=&#34;协议头&#34;&gt;协议头&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/tcpip/kcp.png&#34; alt=&#34;kcp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/tcpip/kcp.png&#34; alt=&#34;kcp&#34;&gt;&lt;/p&gt;
 &lt;p&gt;可以看到有这么几个字段:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;conv&lt;/strong&gt;: 连接标识。&lt;/li&gt;
@@ -3628,10 +3628,10 @@ KCP正常模式同TCP一样使用公平退让法则，即发送窗口大小由�
     
     <item>
       <title>后端面试之系统设计-短网址（Short URL）服务怎么设计？</title>
-      <link>https://www.techxiaofei.com/post/system_design/short_url/</link>
+      <link>https://codexiaofei.github.io/post/system_design/short_url/</link>
       <pubDate>Thu, 23 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/system_design/short_url/</guid>
+      <guid>https://codexiaofei.github.io/post/system_design/short_url/</guid>
       
         <description>&lt;p&gt;​
 本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
@@ -3641,7 +3641,7 @@ KCP正常模式同TCP一样使用公平退让法则，即发送窗口大小由�
 事实上你一定见到过短网址，比如短信里面的网址，微博里面的链接。
 短网址可以减少文本字数，隐藏链接参数等，有利于短信推广的作用，常用于有字数限制的短信、微博、二维码等场景。&lt;/p&gt;
 &lt;p&gt;比如我收到以下的短信：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/aliyun.png&#34; alt=&#34;阿里云&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/aliyun.png&#34; alt=&#34;阿里云&#34;&gt;&lt;/p&gt;
 &lt;p&gt;点开短信链接：http://tb.cn/9GLkgHx&lt;/p&gt;
 &lt;p&gt;对应的实际的网址就是：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://huodong.m.aliyun.com/act/v3jtax.html?gotoUrl=aliyun%3A%2F%2Fforward%2Ff6b8f0a4fa8cfd25da51a182807d5c25%3Ftarget_%3D%2Fapp%2Fhome%26tab_%3Dconsole
@@ -3665,10 +3665,10 @@ KCP正常模式同TCP一样使用公平退让法则，即发送窗口大小由�
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://mp.weixin.qq.com/s?__biz=MzkwNzMwNzI1Ng==&amp;amp;mid=2247483810&amp;amp;idx=1&amp;amp;sn=e252816ee1d5fc1358bf77b8146f3dba&amp;amp;chksm=c0da7035f7adf923ce0beef38a729f305e0d1cc8cc3c18cc491b1c37bffc0786962eaac41772&amp;amp;token=2107487666&amp;amp;lang=zh_CN#rd) 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如图可以看到：
 生成了 &lt;a href=&#34;https://t.hk.uy/aBpj&#34;&gt;https://t.hk.uy/aBpj&lt;/a&gt; 的短网址。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/short_url_1.png&#34; alt=&#34;short_url_1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/short_url_1.png&#34; alt=&#34;short_url_1&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;访问&#34;&gt;访问&lt;/h3&gt;
 &lt;p&gt;浏览器打开这个短网址（同时打开开发者模式）：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/short_url_2.png&#34; alt=&#34;short_url_2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/short_url_2.png&#34; alt=&#34;short_url_2&#34;&gt;&lt;/p&gt;
 &lt;p&gt;一图胜千言，我想你就能明白它的运行原理了。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;当我们在浏览器里输入 &lt;a href=&#34;https://t.hk.uy/aBpj&#34;&gt;https://t.hk.uy/aBpj&lt;/a&gt; 时&lt;/p&gt;
@@ -3777,9 +3777,9 @@ KCP正常模式同TCP一样使用公平退让法则，即发送窗口大小由�
 &lt;li&gt;无记录则使用雪花算法生成一个分布式唯一ID，反转ID，并转换成62进制；&lt;/li&gt;
 &lt;li&gt;完整映射记录写入数据库并返回；&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/short_url_0.png&#34; alt=&#34;short_url_1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/short_url_0.png&#34; alt=&#34;short_url_1&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;系统架构图&#34;&gt;系统架构图&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/system_design/short_url.png&#34; alt=&#34;short_url_1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/system_design/short_url.png&#34; alt=&#34;short_url_1&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我们的服务有以下功能：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;一个短网址服务，负责接收其他服务的 &lt;strong&gt;短网址生成&lt;/strong&gt; 请求，同时接收用户的 &lt;strong&gt;短网址查询&lt;/strong&gt; 请求。&lt;/li&gt;
@@ -3814,10 +3814,10 @@ KCP正常模式同TCP一样使用公平退让法则，即发送窗口大小由�
     
     <item>
       <title>一文看懂Redis 6.0多线程IO</title>
-      <link>https://www.techxiaofei.com/post/redis/multithreading/</link>
+      <link>https://codexiaofei.github.io/post/redis/multithreading/</link>
       <pubDate>Thu, 09 Dec 2021 00:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/redis/multithreading/</guid>
+      <guid>https://codexiaofei.github.io/post/redis/multithreading/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;redis基础&#34;&gt;Redis基础&lt;/h1&gt;
@@ -3860,7 +3860,7 @@ KCP正常模式同TCP一样使用公平退让法则，即发送窗口大小由�
 &lt;/ol&gt;
 &lt;h3 id=&#34;redis网络模型&#34;&gt;Redis网络模型&lt;/h3&gt;
 &lt;p&gt;一张图看懂Redis的单线程模型：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/redis_io.png&#34; alt=&#34;redis_io&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/redis_io.png&#34; alt=&#34;redis_io&#34;&gt;&lt;/p&gt;
 &lt;p&gt;redis的网络事件处理器是基于Reactor模式，又叫做文件事件处理器。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;文件事件处理器&lt;/code&gt;使用&lt;code&gt;I/O多路复用&lt;/code&gt;来同时监听多个套接字，并根据套接字执行的任务关联到不同的事件处理器。&lt;br&gt;
 文件事件以单线程方式运行，但通过使用&lt;code&gt;I/O多路复用&lt;/code&gt;程序来监听多个套接字，&lt;code&gt;文件事件处理器&lt;/code&gt;实现了高性能的网络通信模型。&lt;br&gt;
@@ -3872,7 +3872,7 @@ Redis 在处理客户端的请求时，包括&lt;code&gt;接收&lt;/code&gt;(soc
 &lt;h3 id=&#34;单线程reactor模型&#34;&gt;单线程Reactor模型&lt;/h3&gt;
 &lt;p&gt;Redis的单线程模型就是使用的经典的单线程Reactor模型。&lt;/p&gt;
 &lt;p&gt;我们先看看单线程的Reactor模型&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/reactor1.png&#34; alt=&#34;redis&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/reactor1.png&#34; alt=&#34;redis&#34;&gt;&lt;/p&gt;
 &lt;p&gt;消息处理流程：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Reactor对象通过&lt;code&gt;select/poll/epoll&lt;/code&gt;等IO多路复用监控连接事件，收到事件后通过&lt;code&gt;dispatcher&lt;/code&gt;事件分发器进行转发。&lt;/li&gt;
@@ -3894,7 +3894,7 @@ Redis 在处理客户端的请求时，包括&lt;code&gt;接收&lt;/code&gt;(soc
 &lt;li&gt;Redis网络模型。（6.0版本以前）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;master-worker-reactor模型&#34;&gt;Master-Worker Reactor模型&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/reactor2.png&#34; alt=&#34;redis&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/reactor2.png&#34; alt=&#34;redis&#34;&gt;&lt;/p&gt;
 &lt;p&gt;比起单线程模型，它是将Reactor分成两部分：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;mainReactor&lt;/code&gt; 负责监听server socket，用来处理网络IO连接建立操作，将建立的socketChannel指定注册给subReactor。 &lt;strong&gt;（只负责监听）&lt;/strong&gt;&lt;/li&gt;
@@ -3923,7 +3923,7 @@ Redis 在处理客户端的请求时，包括&lt;code&gt;接收&lt;/code&gt;(soc
 &lt;p&gt;&lt;strong&gt;总结就是：&lt;/strong&gt;&lt;br&gt;
 将主线程 IO 读写任务拆分出来给一组独立的线程处理，使得多个 socket 读写可以并行化，但是 Redis 命令还是主线程串行执行。&lt;/p&gt;
 &lt;h3 id=&#34;redis-60-网络模型&#34;&gt;Redis 6.0 网络模型&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/redis/reactor3.png&#34; alt=&#34;redis&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/redis/reactor3.png&#34; alt=&#34;redis&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;为什么这么设计呢？&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;前面提到 Redis 最初选择单线程网络模型的理由是：CPU 通常不会成为性能瓶颈，瓶颈往往是内存和网络，因此单线程足够了。那么为什么现在 Redis 又要引入多线程呢？很简单，就是 Redis 的&lt;code&gt;网络 I/O 瓶颈&lt;/code&gt;已经越来越明显了。所以这个多线程是为了&lt;code&gt;解决IO的瓶颈&lt;/code&gt;的。&lt;/li&gt;
@@ -3954,10 +3954,10 @@ Redis 在处理客户端的请求时，包括&lt;code&gt;接收&lt;/code&gt;(soc
     
     <item>
       <title>后端面试之Linux-cp和mv命令的区别</title>
-      <link>https://www.techxiaofei.com/post/tech/cp/</link>
+      <link>https://codexiaofei.github.io/post/tech/cp/</link>
       <pubDate>Tue, 07 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/tech/cp/</guid>
+      <guid>https://codexiaofei.github.io/post/tech/cp/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -3972,7 +3972,7 @@ Redis 在处理客户端的请求时，包括&lt;code&gt;接收&lt;/code&gt;(soc
 所以一个大文件的数据内容在磁盘上可能不是连续空间的，就需要inode来把各个&lt;code&gt;Block&lt;/code&gt;串联起来。&lt;/p&gt;
 &lt;p&gt;每个文件都对应一个 i 节点，i 节点存储了除&lt;code&gt;文件名&lt;/code&gt;和&lt;code&gt;文件内容&lt;/code&gt;之外的所有信息。&lt;/p&gt;
 &lt;p&gt;inode（index node）表中包含文件系统所有文件列表，一个节点 （索引节点）是在一个表项，包含有关文件的信息（ 元数据 ），包括：文件类型，权限，UID，GID、链接数（指向这个文件名路径名称个数）、该文件的大小和不同的时间戳、指向磁盘上文件的数据块指针、有关文件的其他数据。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.techxiaofei.com/img/linux/linux_inode.png&#34; alt=&#34;inode&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://codexiaofei.github.io/img/linux/linux_inode.png&#34; alt=&#34;inode&#34;&gt;&lt;/p&gt;
 &lt;p&gt;了解inode的基本信息之后，我们再看看&lt;code&gt;cp&lt;/code&gt;, &lt;code&gt;mv&lt;/code&gt;有什么区别。&lt;/p&gt;
 &lt;h1 id=&#34;cp&#34;&gt;cp&lt;/h1&gt;
 &lt;h3 id=&#34;目标文件不存在时&#34;&gt;目标文件不存在时&lt;/h3&gt;
@@ -4103,10 +4103,10 @@ service restart backend_server
     
     <item>
       <title>MySQL对于千万级的大表要怎么优化？</title>
-      <link>https://www.techxiaofei.com/post/mysql/table/</link>
+      <link>https://codexiaofei.github.io/post/mysql/table/</link>
       <pubDate>Sat, 04 Dec 2021 00:00:00 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/mysql/table/</guid>
+      <guid>https://codexiaofei.github.io/post/mysql/table/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
@@ -4163,10 +4163,10 @@ service restart backend_server
     
     <item>
       <title>游戏服务器和普通服务器的区别</title>
-      <link>https://www.techxiaofei.com/post/backend/game_server/</link>
+      <link>https://codexiaofei.github.io/post/backend/game_server/</link>
       <pubDate>Fri, 03 Dec 2021 14:00:51 +0800</pubDate>
       
-      <guid>https://www.techxiaofei.com/post/backend/game_server/</guid>
+      <guid>https://codexiaofei.github.io/post/backend/game_server/</guid>
       
         <description>&lt;p&gt;本篇博客的视频教程首发于 &lt;a href=&#34;https://www.youtube.com/@techxiaofei&#34;&gt;&lt;strong&gt;Youtube：科技小飞哥&lt;/strong&gt;&lt;/a&gt;，加入 &lt;a href=&#34;https://t.me/+5OzmrG-iyJE2YzM9&#34;&gt;&lt;strong&gt;电报粉丝群&lt;/strong&gt;&lt;/a&gt; 获得最新视频更新和问题解答。&lt;/p&gt;
 &lt;h1 id=&#34;背景&#34;&gt;背景&lt;/h1&gt;
