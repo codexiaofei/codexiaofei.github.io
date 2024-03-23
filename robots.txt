@@ -4,4 +4,4 @@ Allow: /post/
 Allow: /about/
 Disallow: /tags/
 Disallow: /categories/
-Sitemap: https://codexiaofei.github.io/sitemap.xml
+Sitemap: https://www.codexiaofei.com/sitemap.xml
